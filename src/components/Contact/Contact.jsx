@@ -1,7 +1,7 @@
 import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import css from "./Contact.module.css";
 
-const Contact = ({ name, number }) => {
+const Contact = ({ name, number, onDeleteContact, id }) => {
   return (
     <>
       <div className={css.contactValueWrapper}>
@@ -14,7 +14,9 @@ const Contact = ({ name, number }) => {
           {number}
         </p>
       </div>
-      <button type="button">Delete</button>
+      <button type="button" onClick={() => onDeleteContact(id)}>
+        Delete
+      </button>
     </>
   );
 };
