@@ -18,21 +18,21 @@ function App() {
     setFilterValue(value);
   };
 
-  const filteredContacts = ContactsData.filter((contact) =>
+  const filteredContacts = contacts.filter((contact) =>
     contact.name.toLowerCase().includes(filterValue.toLowerCase())
   );
 
-  const onAddContact = (contact) => {
-    const finalContact = { ...contact, id: nanoid() };
+  const onAddContact = (newContact) => {
+    const finalContact = { ...newContact, id: nanoid() };
 
     setContacts([finalContact, ...contacts]);
   };
 
-  // const onDeleteContact = (contactId) => {
-  //   setContacts((finalContact) =>
-  //     finalContact.filter((contact) => contact.id !== contactId)
-  //   );
-  // };
+  const onDeleteContact = (contactId) => {
+    setContacts((finalContact) =>
+      finalContact.filter((contact) => contact.id !== contactId)
+    );
+  };
 
   return (
     <>
@@ -41,7 +41,7 @@ function App() {
       <ContactForm onAddContact={onAddContact} />
       <ContactList
         filteredContacts={filteredContacts}
-        // onDeleteContact={onDeleteContact}
+        onDeleteContact={onDeleteContact}
       />
     </>
   );
