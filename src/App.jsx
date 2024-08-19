@@ -23,27 +23,25 @@ function App() {
   );
 
   const onAddContact = (contact) => {
-    const finalContact = {
-      ...contact,
-      id: nanoid(),
-    };
-    setContacts([finalContact, ...contact]);
+    const finalContact = { ...contact, id: nanoid() };
+
+    setContacts([finalContact, ...contacts]);
   };
 
-  const onDeleteContact = (contactId) => {
-    setContacts((finalContact) =>
-      finalContact.filter((contact) => contact.id !== contactId)
-    );
-  };
+  // const onDeleteContact = (contactId) => {
+  //   setContacts((finalContact) =>
+  //     finalContact.filter((contact) => contact.id !== contactId)
+  //   );
+  // };
 
   return (
     <>
       <h1>Phonebook</h1>
       <SearchBox filterValue={filterValue} handleFilter={handleFilter} />
-      <ContactForm />
+      <ContactForm onAddContact={onAddContact} />
       <ContactList
         filteredContacts={filteredContacts}
-        onDeleteContact={onDeleteContact}
+        // onDeleteContact={onDeleteContact}
       />
     </>
   );
