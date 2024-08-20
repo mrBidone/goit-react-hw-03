@@ -34,7 +34,7 @@ const ContactForm = ({ onAddContact }) => {
   return (
     <>
       <Formik
-        initialValues={{ INITIAL_VALUES }}
+        initialValues={INITIAL_VALUES}
         onSubmit={handleSubmit}
         validationSchema={ContactValidationSchema}
       >
