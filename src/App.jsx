@@ -8,9 +8,18 @@ import ContactForm from "./components/ContactForm/ContactForm";
 import SearchBox from "./components/SearchBox/SearchBox";
 
 function App() {
-  const [contacts, setContacts] = useState(ContactsData);
+  const [contacts, setContacts] = useState(() => {
+    const savedContacts = localStorage.getItem("contacts");
+    return savedContacts && JSON.parse(savedContacts).length > 0
+      ? JSON.parse(savedContacts)
+      : ContactsData;
+  });
 
   const [filterValue, setFilterValue] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  }, [contacts]);
 
   const handleFilter = (e) => {
     const value = e.target.value;
@@ -37,8 +46,8 @@ function App() {
   return (
     <>
       <h1>Phonebook</h1>
-      <SearchBox filterValue={filterValue} handleFilter={handleFilter} />
       <ContactForm onAddContact={onAddContact} />
+      <SearchBox filterValue={filterValue} handleFilter={handleFilter} />
       <ContactList
         filteredContacts={filteredContacts}
         onDeleteContact={onDeleteContact}
